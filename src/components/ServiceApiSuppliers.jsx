@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
+import Global from '../Global';
 
 class ServiceApiSuppliers extends Component {
 
@@ -10,14 +11,14 @@ class ServiceApiSuppliers extends Component {
         supplier: null
     }
 
-    url = "https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers/";
+    urlSuppliers = Global.urlNorthwind;
+    request = "/Suppliers";
 
     loadSuppliers = () => {
         console.log("Antes del servicio");
 
-        axios.get(this.url).then(response => {
+        axios.get(this.urlSuppliers + this.request).then(response => {
             console.log("Leyendo servicio...");
-            console.log("Servicio inicial: " + response.data);
             this.setState({
                 suppliers: response.data.value
             });
@@ -27,19 +28,19 @@ class ServiceApiSuppliers extends Component {
     buscarSupplier = (event) => {
         event.preventDefault();
         console.log("Busqueda iniciada.");
-        var search = this.busqueda.value;
-        var aux = this.state.suppliers;
-        console.log(aux);
-        for (var obj in aux) {
-            console.log("Viendo objeto: " + obj.SupplierID)
-            if (obj.SupplierID === search) {
-                console.log("Objeto encontrado con exito:" + obj);
-                this.setState({
-                    supplier: obj.value
-                });
-            }
-        }
+        var search = parseInt(this.busqueda.current.value);
 
+        axios.get(this.urlSuppliers + this.request).then(response => {
+            console.log("Leyendo servicio...");
+            for (var obj of response.data.value) {
+                if (obj.SupplierID == search) {
+                    this.setState({
+                        supplier: obj
+                    });
+                    break;
+                }
+            }
+        })
     }
 
     componentDidMount = () => {
@@ -54,7 +55,8 @@ class ServiceApiSuppliers extends Component {
                 <ul>
                     {
                         this.state.suppliers.map((suppl, index) => {
-                            return <li key={index}>{suppl.SupplierID}: {suppl.ContactName}</li>
+                            console.log(suppl);
+                            return <li key={index}>ID {suppl.SupplierID}: {suppl.ContactName}</li>
                         })
                     }
                 </ul>
@@ -62,27 +64,40 @@ class ServiceApiSuppliers extends Component {
                 <h3>Búsqueda</h3>
                 <form onSubmit={this.buscarSupplier}>
                     <label>Introduce el ID: </label>
-                    <input type='text' ref={this.busqueda} /><br /><br />
+                    <input type='text' ref={this.busqueda}></input> <br /><br />
                     <button>Buscar</button>
                     <br /><br />
                 </form>
                 <br />
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Compañia</th>
-                            <th>Contacto</th>
-                            <th>Titulo de Contacto</th>
-                            <th>Dirección</th>
-                            <th>Ciudad</th>
-                            <th>País</th>
-                            <th>Teléfono</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                {
+                    this.state.supplier &&
+                    (<table border="1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Compañia</th>
+                                <th>Contacto</th>
+                                <th>Titulo de Contacto</th>
+                                <th>Dirección</th>
+                                <th>Ciudad</th>
+                                <th>País</th>
+                                <th>Teléfono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{this.state.supplier.SupplierID}</td>
+                                <td>{this.state.supplier.CompanyName}</td>
+                                <td>{this.state.supplier.ContactName}</td>
+                                <td>{this.state.supplier.ContactTitle}</td>
+                                <td>{this.state.supplier.Address}</td>
+                                <td>{this.state.supplier.City}</td>
+                                <td>{this.state.supplier.Country}</td>
+                                <td>{this.state.supplier.Phone}</td>
+                            </tr>
+                        </tbody>
+                    </table>)
+                }
             </div>
         )
     }
