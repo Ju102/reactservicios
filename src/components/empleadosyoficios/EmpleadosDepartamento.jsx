@@ -47,7 +47,7 @@ class EmpleadosDepartamento extends Component {
                 <h1 style={{ color: "blue" }}>Empleados por Departamento</h1>
                 <form onSubmit={this.buscarEmpleadoByDept}>
                     <label>Seleccione Departamento: </label>
-                    <select ref={this.selectDepartamento} onSubmit={this.buscarEmpleadoByDept} style={{marginRight: "5px"}}>
+                    <select ref={this.selectDepartamento} style={{marginRight: "5px"}}>
                         {
                             this.state.departamentos.map((departamento, index) => {
                                 return <option key={index} value={departamento.numero}>{departamento.nombre}</option>;
