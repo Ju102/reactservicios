@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import EmpleadosOficio from './components/EmpleadosOficio';
-
+import Router from './Router'
+import MenuRutas from './components/ejemploRouter/MenuRutas';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <EmpleadosOficio></EmpleadosOficio>
+    <div style={{textAlign: "center"}}>
+        <MenuRutas></MenuRutas>
+        <Router></Router>
+    </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

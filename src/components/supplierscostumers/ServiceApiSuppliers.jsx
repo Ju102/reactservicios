@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import Global from '../Global';
+import Global from '../../Global';
 
 class ServiceApiSuppliers extends Component {
 
