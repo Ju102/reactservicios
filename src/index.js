@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Router from './Router'
-import MenuRutas from './components/ejemploRouter/MenuRutas';
+
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importa los estilos de Bootstrap
+import $ from 'jquery'; // Importa jQuery. No necesaria si no uso React
+import Popper from 'popper.js'; // Importa Popper.js
+import 'bootstrap/dist/js/bootstrap.bundle'; // Importa los scripts de Bootstrap
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <div style={{textAlign: "center"}}>
-        <MenuRutas></MenuRutas>
         <Router></Router>
     </div>
 );

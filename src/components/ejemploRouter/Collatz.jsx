@@ -30,6 +30,13 @@ class Collatz extends Component {
         this.loadCollatz();
     }
 
+    componentDidUpdate = (oldProps) => {
+        // Comprobamos si hemos recibido un nuevo numero
+        if (oldProps.numero !== this.props.numero) {
+            this.loadCollatz();
+        }
+    }
+
     render() {
         return (
             <div>

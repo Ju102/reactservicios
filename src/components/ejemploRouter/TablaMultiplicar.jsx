@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Home from './Home';
 
 class TablaMultiplicar extends Component {
   state = {
@@ -22,6 +21,13 @@ class TablaMultiplicar extends Component {
 
   componentDidMount = () => {
     this.generarTablaMultiplicar();
+  }
+
+  componentDidUpdate = (oldProps) => {
+    // Comprobamos si hemos recibido un nuevo numero
+    if (oldProps.numero !== this.props.numero) {
+      this.generarTablaMultiplicar();
+    }
   }
 
   render() {

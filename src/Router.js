@@ -5,6 +5,7 @@ import TablaMultiplicar from './components/ejemploRouter/TablaMultiplicar';
 import NotFound from './components/ejemploRouter/NotFound';
 import { useParams } from 'react-router-dom';
 import Collatz from './components/ejemploRouter/Collatz';
+import MenuRutas from './components/ejemploRouter/MenuRutas';
 
 class Router extends Component {
     render() {
@@ -25,6 +26,7 @@ class Router extends Component {
 
         return (
             <BrowserRouter>
+                <MenuRutas></MenuRutas>
                 <Routes>
                     <Route path="/" element={<Home></Home>}></Route>
                     <Route path="/tabla/:num" element={<TablaMultiplicarElement></TablaMultiplicarElement>}></Route>
