@@ -8,11 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Importa los estilos de Bootstr
 import $ from 'jquery'; // Importa jQuery. No necesaria si no uso React
 import Popper from 'popper.js'; // Importa Popper.js
 import 'bootstrap/dist/js/bootstrap.bundle'; // Importa los scripts de Bootstrap
+import HospitalesMultiple from './components/HospitalesMultiple';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <div style={{textAlign: "center"}}>
-        <Router></Router>
+    <div style={{textAlign: "center", margin: "20px", backgroundColor: "lightblue"}}>
+        <HospitalesMultiple />
     </div>
 );
 
